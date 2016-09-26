@@ -50,15 +50,15 @@ public class terrainGenerator : MonoBehaviour {
                     curCube = GameObject.CreatePrimitive(PrimitiveType.Cube);
                     curCube.transform.position = startPos + new Vector3((i+(((float)tI)/2))*blockSize,0, j*blockSize);
                     curCube.transform.localScale = new Vector3(tI * blockSize + blockSize,blockHeight,blockSize);
-                    /*
+                    
                     navMeshObstacle = curCube.AddComponent<NavMeshObstacle>();
                     navMeshObstacle.carving = true;
                     navMeshObstacle.carveOnlyStationary = true;
                     navMeshObstacle.shape = NavMeshObstacleShape.Box;
-                    */
+                    
                     
                    i += tI;
-                    Debug.Log(i);
+                   Debug.Log(i);
                 }
             }
             //Debug.Log(i + " + " + tI);
@@ -94,8 +94,14 @@ public class terrainGenerator : MonoBehaviour {
 
         for (int i = 0; i < fiterations || curArea < fminArea; i++)
         {
+            if (i > fiterations)
+            {
+                fx = fgridSize / 2;
+                fy = fgridSize / 2;
+                i = 0;
+            }
             if (fgrid[fx, fy] == false) curArea++;
-
+           
             fgrid[fx, fy] = true;
        
             if (noDiagonal)
