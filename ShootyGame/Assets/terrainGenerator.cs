@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class terrainGenerator : MonoBehaviour {
     public float blockHeight = 0.0f;
@@ -7,7 +8,7 @@ public class terrainGenerator : MonoBehaviour {
     public int iterations = 1200;
     public int minArea = 900;
     bool[,] grid;
-
+    List<Vector3> openSpaces = new List<Vector3>();
     int gridSize = 0;
     // Use this for initialization
     void Start()
@@ -68,6 +69,17 @@ public class terrainGenerator : MonoBehaviour {
         Debug.Log(count);
         Debug.Log(gridSize * gridSize);
         Debug.Log(minArea);
+        for (int i = 0; i < gridSize; i++)
+        {
+            for (int j = 0; j < gridSize; j++)
+            {
+                if (grid[i, j] == true)
+                {
+                    openSpaces.Add(startPos + new Vector3((i + (((float)tI) / 2)) * blockSize, 0, j * blockSize));
+                }
+            }
+        }
+        
     }
     void PrintDungeon(bool[,] dungeon, int fgridsize) {
         string tstr = "";
